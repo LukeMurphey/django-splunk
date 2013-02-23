@@ -1,0 +1,4 @@
+<nav>
+  <view name="operations" default="true" />
+  <view name="database_performance" />
+</nav>

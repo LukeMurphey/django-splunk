@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<dashboard>
+  <label>SQL Performance</label>
+  <row>
+    <table>
+      <searchName>highest_total_duration_sql_queries_summary</searchName>
+      <title>Queries with Highest Total Duration</title>
+    </table>
+    <table>
+      <searchName>most_common_sql_queries_summary</searchName>
+      <title>Most Common Queries</title>
+    </table>
+  </row>
+  <row>
+    <table>
+      <searchName>sql_query_actions</searchName>
+      <title>Queries</title>
+      <option name="count">10</option>
+      <option name="displayRowNumbers">true</option>
+    </table>
+  </row>
+  <row>
+    <table>
+      <searchName>highest_total_duration_sql_queries</searchName>
+      <title>Queries with Highest Total Duration (detailed)</title>
+      <option name="count">10</option>
+      <option name="displayRowNumbers">true</option>
+    </table>
+  </row>
+  <row>
+    <table>
+      <searchName>most_common_sql_queries</searchName>
+      <title>Most Common Queries (detailed)</title>
+      <option name="count">10</option>
+      <option name="displayRowNumbers">true</option>
+    </table>
+  </row>
+</dashboard>
