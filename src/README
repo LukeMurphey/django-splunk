@@ -1,0 +1,94 @@
+================================================
+Overview
+================================================
+
+This app provides some views intended to make analyzing the logs from Django apps easier.
+
+
+
+================================================
+Configuring Django
+================================================
+
+You'll need to configure Django in order to create the logs in a format that Splunk for Django accepts. To do so, set a formatter that makes log messages that work with Splunk. You can do this by copying the following into your settings.py file:
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler'
+        },
+        'default': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': '../var/log/app.log', # Make sure that this path exists, change as necessary
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'standard',
+        }
+    },
+    'loggers': {
+        'django.db': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True, # Set this to false on production hosts since the database logs are very verbose
+        },
+        '': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['default'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
+
+This will configure a rotating file handler to the directory ../var/log/app.log. Make sure that this path exists or change it to log to the wherever you would like the log files to exist. Also, make sure to disable propagation of the database logs on production hosts since these logs can be very verbose. 
+
+================================================
+Configuring Splunk
+================================================
+
+Setup Splunk to monitor the logs files from your Django installation. Make sure to set the sourcetype to "django". See the following page for details on how to monitor files with Splunk:
+
+     http://docs.splunk.com/Documentation/Splunk/latest/Data/MonitorFilesandDirectories for 
+
+
+================================================
+Getting Support
+================================================
+
+Go to the following website if you need support:
+
+     https://github.com/LukeMurphey/django-splunk
+
+
+
+================================================
+Change History
+================================================
+
++---------+---------------------------------------------------------------------------------------------------------------+
+| Version |  Changes                                                                                                      |
++---------+---------------------------------------------------------------------------------------------------------------+
+| 0.1     | Initial version                                                                                               |
++---------+---------------------------------------------------------------------------------------------------------------+
