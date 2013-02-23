@@ -1,0 +1,6 @@
+vendor_severity,severity
+DEBUG,informational
+INFO,informational
+CRITICAL,critical
+WARNING,medium
+ERROR,high
