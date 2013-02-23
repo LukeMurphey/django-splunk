@@ -183,5 +183,41 @@
             <arg line="--accept-license" />
         </exec>
     </target>
+	
+    <!-- ================================= 
+          target: deploy_and_refresh_splunk
+         ================================= -->
+    <target name="deploy_and_refresh_splunk" description="Deploys the application and forces Splunk to refresh" depends="deploy,refresh_splunk" />
+	
+    <!-- ================================= 
+          target: refresh_splunk
+         ================================= -->
+    <target name="refresh_splunk" description="Refresh Splunk">
+    	
+      	<!-- Define the username and password if not already defined -->
+      	<property name="splunk_username" value="admin"/>
+      	<property name="splunk_password" value="changeme"/>
+      	
+      	<!-- Define a macro that can be used for refreshing Splunk endpoints -->
+      	<macrodef name="reload_conf">
+    		<attribute name="endpoint"/>
+    		<sequential>
+    			<exec failonerror="true" executable="${value.deploy.splunk_home}/bin/splunk"> <!-- Fail on error is set to true -->
+    				<arg value="_internal"/>
+    				<arg value="call"/>
+    				<arg value="/admin/@{endpoint}/_reload"/>
+    				<arg value="-auth"/>
+    				<arg value="${splunk_username}:${splunk_password}"/>
+    				<arg value="--accept-license"/>
+    			</exec>
+    		</sequential>
+      	</macrodef>
+    	
+    	<reload_conf endpoint="savedsearch" />
+    	<reload_conf endpoint="nav" />
+    	<reload_conf endpoint="views" />
+    	
+    </target>
+
     
 </project>
