@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <dashboard>
-  <label>Operations</label>
+  <label>Errors</label>
   <row>
     <table>
       <searchName>server_500_errors</searchName>

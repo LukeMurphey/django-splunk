@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <dashboard>
-  <label>SQL Performance</label>
+  <label>Database Performance</label>
   <row>
     <table>
-      <searchName>highest_total_duration_sql_queries_summary</searchName>
-      <title>Queries with Highest Total Duration</title>
+      <searchName>sql_query_actions</searchName>
+      <title>Queries</title>
+      <option name="count">10</option>
+      <option name="displayRowNumbers">true</option>
     </table>
     <table>
       <searchName>most_common_sql_queries_summary</searchName>
@@ -13,10 +15,8 @@
   </row>
   <row>
     <table>
-      <searchName>sql_query_actions</searchName>
-      <title>Queries</title>
-      <option name="count">10</option>
-      <option name="displayRowNumbers">true</option>
+      <searchName>highest_total_duration_sql_queries_summary</searchName>
+      <title>Queries with Highest Total Duration</title>
     </table>
   </row>
   <row>
