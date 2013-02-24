@@ -3,11 +3,11 @@
 }
 
 .appHeaderWrapper a {
-	color: #FFF;
+	color: #FFF;	
 }
 
 .appLogoContainer > h1{
-	/* Hide the text. */
+	/* Hide the text of the title so that we can show the Django logo instead */
 	text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
