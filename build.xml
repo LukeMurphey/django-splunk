@@ -37,11 +37,13 @@
     </target>
     
     <!-- ================================= 
-          target: get_build_number
+          target: increment_build_number
          ================================= -->
-    <target name="get_build_number">
-		
-    </target>
+	<target name="increment_build_number">
+	    <propertyfile  file="default.properties">
+	            <entry key="value.build.number" type="int" operation="+" value="1" pattern="0"/>
+	    </propertyfile>
+	</target>
     
     <!-- ================================= 
           target: clean_packages
@@ -68,7 +70,7 @@
     <!-- ================================= 
           target: populate_export_dir
          ================================= -->
-    <target name="populate_export_dir" depends="get_build_number">
+    <target name="populate_export_dir">
         
         <!-- Copy the files over that need substitution. This should only be
              applied to text files since Ant may corrupt binary files otherwise. -->
@@ -81,7 +83,7 @@
             
             <!-- Perform the substitution of the build information -->
             <filterset begintoken="${" endtoken="}"> 
-                <filter token="build.number" value="${build.number}" />
+                <filter token="value.build.number" value="${value.build.number}" />
             </filterset>
         </copy>
         
@@ -119,7 +121,7 @@
         <!-- Delete the temporary location so that old files do not get streamed in -->
         <delete dir="${value.temp.directory}" />
         
-        <echo>App ${value.build.appname} build ${build.number} created: ${value.build.packageoutput.directory}/${value.build.appname}.tar.gz</echo>
+        <echo>App ${value.build.appname} build ${value.build.number} created: ${value.build.packageoutput.directory}/${value.build.appname}.tar.gz</echo>
 
     </target>
     
@@ -140,7 +142,7 @@
           target: deploy
          ================================= -->
     <target name="deploy" depends="setup_tmp_directory_for_deployment,populate_export_dir" description="Deploys the app to an instance of Splunk" >
-        <echo>App ${value.build.appname} build ${build.number} deployed to ${export_dir}</echo>
+        <echo>App ${value.build.appname} build ${value.build.number} deployed to ${export_dir}</echo>
     </target>
     
     <!-- ================================= 
