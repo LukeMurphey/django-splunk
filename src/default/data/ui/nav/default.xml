@@ -1,5 +1,5 @@
 <nav>
   <view name="operations" default="true" />
-  <view name="database_performance" />
+  <view name="database" />
   <view name="flashtimeline" />
 </nav>
