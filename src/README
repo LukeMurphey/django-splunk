@@ -70,7 +70,7 @@ Configuring Splunk
 
 Setup Splunk to monitor the logs files from your Django installation. Make sure to set the sourcetype to "django". See the following page for details on how to monitor files with Splunk:
 
-     http://docs.splunk.com/Documentation/Splunk/latest/Data/MonitorFilesandDirectories for 
+     http://docs.splunk.com/Documentation/Splunk/latest/Data/MonitorFilesandDirectories
 
 
 ================================================
