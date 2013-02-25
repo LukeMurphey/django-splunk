@@ -1,44 +1,53 @@
 <?xml version='1.0' encoding='utf-8'?>
-<dashboard>
-  <label>Errors</label>
-  <row>
-    <table>
-      <searchName>server_500_errors</searchName>
-      <title>Internal Server Errors</title>
-      <option name="count">10</option>
-      <option name="displayRowNumbers">true</option>
-    </table>
-  </row>
-  <row>
-    <single>
-      <searchName>recent_errors_count</searchName>
-      <title>Recent Errors</title>
-      <option name="beforeLabel">Errors within last 7 days:</option>
-      <option name="charting.chart.style">shiny</option>
-      <option name="count">10</option>
-      <option name="displayRowNumbers">true</option>
-    </single>
-    <chart>
-      <searchString>sourcetype="django" tag=error | timechart count</searchString>
-      <title>Errors Over Time</title>
-      <earliestTime>-7d</earliestTime>
-      <latestTime>now</latestTime>
-      <option name="charting.chart">area</option>
-      <option name="count">10</option>
-      <option name="displayRowNumbers">true</option>
-    </chart>
-    <chart>
-      <searchName>messages_by_severity</searchName>
-      <title>Messages by Severity</title>
-      <option name="charting.chart">area</option>
-      <option name="count">10</option>
-      <option name="displayRowNumbers">true</option>
-    </chart>
-  </row>
-  <row>
-    <table>
-      <searchName>server_errors_non_web_facing</searchName>
-      <title>Non-Web Facing Errors</title>
-    </table>
-  </row>
-</dashboard>
+<form>
+
+	<fieldset>
+		<input type="time" />
+	</fieldset>
+
+	<label>Errors</label>
+	<row>
+		<table>
+			<searchName>server_500_errors</searchName>
+			<title>Internal Server Errors</title>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+			<drilldown>
+				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango%20error_message%3D"$row.error_message$"&earliest=$earliest$&latest=$latest$]]></link>
+			</drilldown>
+		</table>
+	</row>
+	<row>
+		<single>
+			<searchName>recent_errors_count</searchName>
+			<title>Recent Errors</title>
+			<option name="beforeLabel">Errors within last 7 days:</option>
+			<option name="charting.chart.style">shiny</option>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+		</single>
+		<chart>
+			<searchString>sourcetype="django" tag=error | timechart count
+			</searchString>
+			<title>Errors Over Time</title>
+			<earliestTime>-7d</earliestTime>
+			<latestTime>now</latestTime>
+			<option name="charting.chart">area</option>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+		</chart>
+		<chart>
+			<searchName>messages_by_severity</searchName>
+			<title>Messages by Severity</title>
+			<option name="charting.chart">area</option>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+		</chart>
+	</row>
+	<row>
+		<table>
+			<searchName>server_errors_non_web_facing</searchName>
+			<title>Non-Web Facing Errors</title>
+		</table>
+	</row>
+</form>
