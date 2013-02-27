@@ -18,14 +18,6 @@
 		</table>
 	</row>
 	<row>
-		<single>
-			<searchName>recent_errors_count</searchName>
-			<title>Recent Errors</title>
-			<option name="beforeLabel">Errors within last 7 days:</option>
-			<option name="charting.chart.style">shiny</option>
-			<option name="count">10</option>
-			<option name="displayRowNumbers">true</option>
-		</single>
 		<chart>
 			<searchString>sourcetype="django" tag=error | timechart count
 			</searchString>
