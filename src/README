@@ -46,8 +46,8 @@ LOGGING = {
     'loggers': {
         'django.db': {
             'handlers': ['default'],
-            'level': 'DEBUG',
-            'propagate': True, # Set this to false on production hosts since the database logs are very verbose
+            'level': 'DEBUG', # Set this to ERROR on production hosts since the database logs are very verbose
+            'propagate': False, 
         },
         '': {
             'handlers': ['default'],
@@ -56,12 +56,11 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['default'],
-            'level': 'ERROR',
-            'propagate': True,
+            'level': 'DEBUG', # Set this to ERROR on production hosts if you want to avoid lots of warnings for 404 file-not-found notices
+            'propagate': False,
         },
     }
 }
-
 This will configure a rotating file handler to the directory ../var/log/app.log. Make sure that this path exists or change it to log to the wherever you would like the log files to exist. Also, make sure to disable propagation of the database logs on production hosts since these logs can be very verbose. 
 
 
