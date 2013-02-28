@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+
+	<fieldset>
+		<input type="time" />
+	</fieldset>
+
+	<label>Overview</label>
+	<row>
+		<chart>
+			<searchName>messages_by_severity</searchName>
+			<title>Messages by Severity</title>
+			<option name="charting.chart">area</option>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+		</chart>
+		<table>
+			<searchName>messages_by_module</searchName>
+			<title>Messages by Logger Name</title>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+			<drilldown>
+				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango%20error_message%3D"$row.module$"&earliest=$earliest$&latest=$latest$]]></link>
+			</drilldown>
+		</table>
+	</row>
+	<row>
+		<table>
+			<searchString>sourcetype="django" NOT (tag=database_query) | fillnull value="(undefined)" message | table message | head 1000</searchString>
+			<title>Most Recent Messages (Excluding SQL Logs)</title>
+			<option name="count">10</option>
+			<option name="displayRowNumbers">true</option>
+		</table>
+	</row>
+
+</form>

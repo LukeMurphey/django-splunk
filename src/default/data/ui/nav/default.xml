@@ -1,5 +1,6 @@
 <nav>
-  <view name="errors" default="true" />
+  <view name="operations" default="true" />
+  <view name="errors" />
   <view name="database" />
   <view name="flashtimeline" />
 </nav>
