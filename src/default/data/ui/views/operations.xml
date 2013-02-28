@@ -35,7 +35,7 @@
 			</drilldown>
 		</table>
 		<table>
-			<searchString>sourcetype="django" NOT (tag=database_query) | fillnull value="(undefined)" message | table message severity | head 1000</searchString>
+			<searchString>sourcetype="django" NOT (tag=database_query) | eval severity=lower(vendor_severity) | fillnull value="(undefined)" message | table message severity | head 1000</searchString>
 			<title>Most Recent Messages (Excluding SQL Logs)</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
