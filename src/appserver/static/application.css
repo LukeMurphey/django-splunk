@@ -76,3 +76,7 @@ body.splTemplate-dashboard,
 .dashboardContent > .StaticContentSample{
 	padding-left: 10px;
 }
+
+.splApp-django .empty_results{
+	background-color: #e5e7e5;	
+}
