@@ -1,5 +1,16 @@
 .appHeaderWrapper{
-	background: #092e20;
+	/* background: #092e20; */
+	background: linear-gradient(top, #082d1f 8%, #051d14 54%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.08, #082d1f), color-stop(0.54, #051d14));
+	background-color: #082d1f;
+	background-image: linear-gradient(top, #082d1f 8%, #051d14 54%);
+	background-image: -o-linear-gradient(top, #082d1f 8%, #051d14 54%);
+	background-image: -moz-linear-gradient(top, #082d1f 8%, #051d14 54%);
+	background-image: -webkit-linear-gradient(top, #082d1f 8%, #051d14 54%)
+}
+
+.appHeaderWrapper2{
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.08, #234e30), color-stop(0.54, #082d1f))
 }
 
 .appHeaderWrapper a {
@@ -17,4 +28,51 @@
 	background-position-y: 7px;
 }
 
+.splHeader-dashboard h2 {
+	color: #3F3F3F;
+	font-size: 16px;
+	font-weight: 100;
+	font-family: "Helvetica nenu", Helvetica, Arial, sans-serif;
+	line-height: normal;
+	margin: 15px 50px 19px 16px;
+}
 
+.StaticContentSample h1{
+	color: #3F3F3F;
+	font-size: 20px;
+	font-weight: 100;
+	font-family: "Helvetica nenu", Helvetica, Arial, sans-serif;
+	line-height: normal;
+}
+
+body.splTemplate-dashboard, 
+.TitleBar .splHeader, 
+.viewHeader, 
+.mainSearchControls, 
+.JobStatus,
+.splView-flashtimeline .ResultsHeader .splHeader-primary,
+.DisableRequiredFieldsButton,
+.sidebarExpanded,
+.splSearchControls-inline,
+.JobStatus {
+	background-color: #f5f7f5;
+}
+
+.splApp-django .JobStatus{
+	background: -webkit-linear-gradient(top, #f5f7f5 0%, #c5c9c9 100%);
+	background: linear-gradient(top, #f5f7f5 0%, #c5c9c9 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f5f7f5), color-stop(1.00, #c5c9c9));
+	background-color: #f5f7f5;
+	background-image: linear-gradient(top, #f5f7f5 0%, #c5c9c9 100%);
+	background-image: -o-linear-gradient(top, #f5f7f5 0%, #c5c9c9 100%);
+	background-image: -moz-linear-gradient(top, #f5f7f5 0%, #c5c9c9 100%);
+	background-image: -webkit-linear-gradient(top, #f5f7f5 0%, #c5c9c9 100%)
+}
+
+.dashboardContent .Paginator{
+	padding-left: 10px;
+}
+
+.dashboardContent > .StaticContentSample{
+	padding-left: 10px;
+}
