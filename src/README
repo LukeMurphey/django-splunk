@@ -64,6 +64,7 @@ LOGGING = {
 
 This will configure a rotating file handler to the directory ../var/log/app.log. Make sure that this path exists or change it to log to the wherever you would like the log files to exist. Also, make sure to disable propagation of the database logs on production hosts since these logs can be very verbose. 
 
+
 ================================================
 Configuring Splunk
 ================================================
@@ -82,7 +83,6 @@ Go to the following website if you need support:
      https://github.com/LukeMurphey/django-splunk
 
 
-
 ================================================
 Change History
 ================================================
@@ -90,5 +90,7 @@ Change History
 +---------+---------------------------------------------------------------------------------------------------------------+
 | Version |  Changes                                                                                                      |
 +---------+---------------------------------------------------------------------------------------------------------------+
-| 0.1     | Initial version                                                                                               |
+| 0.5     | Initial release                                                                                               |
+|---------|---------------------------------------------------------------------------------------------------------------|
+| 0.6     | Added a new overview dashboard, updated the styling, other miscellaneous changes                              |
 +---------+---------------------------------------------------------------------------------------------------------------+
