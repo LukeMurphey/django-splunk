@@ -86,10 +86,16 @@ Go to the following website if you need support:
 Change History
 ================================================
 
-+---------+---------------------------------------------------------------------------------------------------------------+
-| Version |  Changes                                                                                                      |
-+---------+---------------------------------------------------------------------------------------------------------------+
-| 0.5     | Initial release                                                                                               |
-|---------|---------------------------------------------------------------------------------------------------------------|
-| 0.6     | Added a new overview dashboard, updated the styling, other miscellaneous changes                              |
-+---------+---------------------------------------------------------------------------------------------------------------+
++---------+------------------------------------------------------------------------------------------------------------------+
+| Version |  Changes                                                                                                         |
++---------+------------------------------------------------------------------------------------------------------------------+
+| 0.5     | Initial release                                                                                                  |
+|---------|------------------------------------------------------------------------------------------------------------------|
+| 0.6     | Added a new overview dashboard, updated the styling, other miscellaneous changes                                 |
+|---------|------------------------------------------------------------------------------------------------------------------|
+| 0.7     | Updated the overview dashboard to include a messages by severity over time chart                                 |
+|         | Combined the table of queries with highest duration with the most common queries table on the database dashboard |
+|         | Added parsing of the args field in the database logs                                                             |
+|         | Updated the suggested template for the Django configuration                                                      |
+|         | Added an improved line-breaker that should ensure events are broken correctly                                    |
++---------+------------------------------------------------------------------------------------------------------------------+
