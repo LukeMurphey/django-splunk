@@ -102,4 +102,6 @@ Change History
 |         | Set the colors of the charts to match the content (e.g. critical severity is red)                                |
 |         | Fixed issue where modules name with underscores were not being extracted properly                                |
 |         | Fixed drill-down on the "messages by severity" panel on the overview dashboard                                   |
+|---------|------------------------------------------------------------------------------------------------------------------|
+| 0.8     | Renamed the app icon so that it shows up on older version of Splunk                                              |
 +---------+------------------------------------------------------------------------------------------------------------------+
