@@ -22,7 +22,7 @@
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
 			<drilldown>
-				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango%20severity%3D"$row.severity$"&earliest=$earliest$&latest=$latest$]]></link>
+				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango%20%7C%20fillnull%20value%3D"undefined"%20vendor_severity%20%7C%20eval%20severity%3Dlower(vendor_severity)%20%7C%20search%20severity%3D"$row.severity$"&earliest=$earliest$&latest=$latest$]]></link>
 			</drilldown>
 		</table>
 	</row>
