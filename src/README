@@ -104,4 +104,6 @@ Change History
 |         | Fixed drill-down on the "messages by severity" panel on the overview dashboard                                   |
 |---------|------------------------------------------------------------------------------------------------------------------|
 | 0.8     | Renamed the app icon so that it shows up on older version of Splunk                                              |
+|---------|------------------------------------------------------------------------------------------------------------------|
+| 0.9     | Updated the README to give an example of using a format string with a timezone specified                         |
 +---------+------------------------------------------------------------------------------------------------------------------+
