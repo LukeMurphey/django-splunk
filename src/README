@@ -98,4 +98,8 @@ Change History
 |         | Added parsing of the args field in the database logs                                                             |
 |         | Updated the suggested template for the Django configuration                                                      |
 |         | Added an improved line-breaker that should ensure events are broken correctly                                    |
+|         | The most recent messages list on the overview dashboard now updates correctly with real-time searches            |
+|         | Set the colors of the charts to match the content (e.g. critical severity is red)                                |
+|         | Fixed issue where modules name with underscores were not being extracted properly                                |
+|         | Fixed drill-down on the "messages by severity" panel on the overview dashboard                                   |
 +---------+------------------------------------------------------------------------------------------------------------------+
