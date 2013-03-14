@@ -106,4 +106,5 @@ Change History
 | 0.8     | Renamed the app icon so that it shows up on older version of Splunk                                              |
 |---------|------------------------------------------------------------------------------------------------------------------|
 | 0.9     | Updated the README to give an example of using a format string with a timezone specified                         |
+|         | Fixed issue where the panel displaying non-web-facing errors would not show results                              |
 +---------+------------------------------------------------------------------------------------------------------------------+
