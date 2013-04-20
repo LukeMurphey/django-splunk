@@ -1,6 +1,10 @@
 /local.properties
 /tmp
 
+*.pyc
+.project
+.pydevproject
+
 # OS generated files #
 ######################
 .DS_Store
