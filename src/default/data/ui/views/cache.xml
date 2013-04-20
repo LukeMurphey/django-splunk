@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+	
+	<label>Cache</label>
+
+	<fieldset>
+		<input type="time" />
+		<input type="text" token="stanza">
+			<label>Stanza:</label>
+			<default>*</default>
+		</input>
+	</fieldset>
+	
+	<row>
+		<html>
+			<h1>Filesystem Cache Monitoring</h1>
+			<p>
+			This dashboard reports on the size of the Django filesystem cache.
+			See <a target="_blank" href="https://docs.djangoproject.com/en/dev/topics/cache/#filesystem-caching">DjangoProject.com</a> for more information about how to setup and use the caching framework.
+			To begin monitoring a Django file cache, setup a new instance in the <a href="/manager/django/data/inputs/django_cache_size">Manager</a>.
+			</p>
+		</html>
+	</row>
+	
+	<row>
+		<chart>
+			<title>Cache by Size</title>
+		  	<searchString>
+		    	sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_size) by stanza
+		  	</searchString>
+		  	<option name="height">200px</option>
+		  	<option name="charting.chart">area</option>
+		  	<option name="charting.chart.stackMode">stacked</option>
+		  	<option name="charting.chart.nullValueMode">connect</option>
+			
+			<drilldown>
+				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango_file_cache_size%20stanza%3D"$form.stanza$"&earliest=$earliest$&latest=$latest$]]></link>
+			</drilldown>
+		</chart>
+	</row>
+	
+	<row>
+		<chart>
+			<title>Cache by Number of Files</title>
+		  	<searchString>
+		    	sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_files) by stanza
+		  	</searchString>
+		  	<option name="height">200px</option>
+		  	<option name="charting.chart">area</option>
+		  	<option name="charting.chart.stackMode">stacked</option>
+		  	<option name="charting.chart.nullValueMode">connect</option>
+			
+			<drilldown>
+				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango_file_cache_size%20stanza%3D"$form.stanza$"&earliest=$earliest$&latest=$latest$]]></link>
+			</drilldown>
+		</chart>
+	</row>
+
+</form>
