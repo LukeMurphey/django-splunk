@@ -109,4 +109,5 @@ Change History
 |         | Fixed issue where the panel displaying non-web-facing errors would not show results                              |
 |---------|------------------------------------------------------------------------------------------------------------------|
 | 1.0     | Added extractions for the path that was requested in 404 errors                                                  |
+|         | Added dashboard and inputs for monitoring the file-system cache size                                             |
 +---------+------------------------------------------------------------------------------------------------------------------+
