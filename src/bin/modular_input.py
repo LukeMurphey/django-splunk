@@ -33,7 +33,6 @@ logger = setup_logger()
 class FieldValidationException(Exception):
     pass
 
-
 class Field(object):
     """
     This is the base class that should be used to for field validators. Sub-class this and override to_python if you need custom validation.
@@ -361,6 +360,7 @@ class ModularInput():
     # These arguments cover the standard fields that are always supplied
     standard_args = [
                 Field("name", "Stanza name", "The name of the stanza for this modular input", empty_allowed=True),
+                Field("stanza", "Stanza name", "The name of the stanza for this modular input", empty_allowed=True),
                 Field("source", "Source", "The source for events created by this modular input", empty_allowed=True),
                 Field("sourcetype", "Stanza name", "The name of the stanza for this modular input", empty_allowed=True),
                 Field("index", "Index", "The index that data should be sent to", empty_allowed=True),
@@ -637,7 +637,7 @@ class ModularInput():
         data = self.get_validation_data()
         
         try:
-            self.validate(data)
+            self.validate_parameters(None, data)
             return True
         except FieldValidationException as e:
             self.print_error(str(e))
@@ -698,7 +698,7 @@ class ModularInput():
         out -- The stream to write the message to (defaults to standard output)
         """
         
-        out.write("<error><message>%s</message></error>" % traceback.format_exc())
+        out.write("<error><message>%s</message></error>" % error)
     
     def read_config(self, in_stream=sys.stdin):
         """

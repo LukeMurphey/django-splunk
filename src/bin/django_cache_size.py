@@ -1,7 +1,5 @@
 
 from splunk.appserver.mrsparkle.lib.util import make_splunkhome_path
-from modular_input import Field, FieldValidationException, ModularInput
-
 import re
 import logging
 from logging import handlers
@@ -31,6 +29,8 @@ def setup_logger():
     return logger
 
 logger = setup_logger()
+
+from modular_input import Field, FieldValidationException, ModularInput
 
 class PathField(Field):
     """
