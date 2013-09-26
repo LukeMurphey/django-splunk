@@ -1,4 +1,4 @@
-<nav>
+<nav color="#383F38">
   <view name="operations" default="true" />
   <view name="errors" />
   <view name="database" />
