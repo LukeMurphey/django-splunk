@@ -112,4 +112,8 @@ Change History
 |         | Added dashboard and inputs for monitoring the file-system cache size                                             |
 |---------|------------------------------------------------------------------------------------------------------------------|
 | 1.1     | Updated to work with Splunk 6.0                                                                                  |
+|---------|------------------------------------------------------------------------------------------------------------------|
+| 1.2     | Fixed issue where dashboards did not use a default time-frame                                                    |
+|         | Fixed line-breaking                                                                                              |
+|         | Stacktraces are no longer show for the messages on the Operations dashboard                                      |
 +---------+------------------------------------------------------------------------------------------------------------------+
