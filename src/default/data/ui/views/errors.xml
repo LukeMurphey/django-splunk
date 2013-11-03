@@ -2,13 +2,16 @@
 <form>
 
 	<fieldset>
-		<input type="time" />
+		<input type="time">
+			<default>Last 24 hours</default>
+		</input>
 	</fieldset>
 
 	<label>Errors</label>
 	<row>
 		<table>
-			<searchName>server_500_errors</searchName>
+			<!-- <searchName>server_500_errors</searchName>  -->
+			<searchString>sourcetype="django" tag=server tag=error | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by url error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</searchString>
 			<title>Errors (Web Facing)</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
@@ -19,7 +22,8 @@
 	</row>
 	<row>
 		<table>
-			<searchName>server_errors_non_web_facing</searchName>
+			<!-- <searchName>server_errors_non_web_facing</searchName> -->
+			<searchString>sourcetype="django" tag=error NOT tag=server | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</searchString>
 			<title>Errors (Non-Web Facing)</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>

@@ -4,7 +4,9 @@
 	<label>Cache</label>
 
 	<fieldset>
-		<input type="time" />
+		<input type="time">
+			<default>Last 24 hours</default>
+		</input>
 		<input type="text" token="stanza">
 			<label>Stanza:</label>
 			<default>*</default>
