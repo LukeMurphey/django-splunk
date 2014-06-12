@@ -116,4 +116,6 @@ Change History
 | 1.2     | Fixed issue where dashboards did not use a default time-frame                                                    |
 |         | Fixed line-breaking                                                                                              |
 |         | Stacktraces are no longer show for the messages on the Operations dashboard                                      |
+|---------|------------------------------------------------------------------------------------------------------------------|
+| 1.2.1   | Views now automatically start the searches when loaded                                                           |
 +---------+------------------------------------------------------------------------------------------------------------------+
