@@ -17,7 +17,7 @@
 		</html>
 	</row>
 
-	<fieldset>
+	<fieldset autoRun="true">
 		<input type="time">
 			<default>Last 24 hours</default>
 		</input>
