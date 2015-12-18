@@ -5,12 +5,12 @@
 		<input type="time">
 			<default>Last 24 hours</default>
 		</input>
-		<input type="dropdown" token="source">
-			<label>Source:</label>
+		<input type="dropdown" token="host">
+			<label>Host:</label>
 			<default>*</default>
 			<choice value="*">All</choice>
-			<populatingSearch fieldForLabel="source" fieldForValue="source">
-				sourcetype="django" | stats count by source
+			<populatingSearch fieldForLabel="host" fieldForValue="host">
+				sourcetype="django" | stats count by host
 			</populatingSearch>
 		</input>
 	</fieldset>
@@ -19,7 +19,7 @@
 	<row>
 		<chart>
 			<!-- <searchName>messages_by_severity_over_time</searchName> -->
-			<searchString>sourcetype="django" source="$source$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | timechart count(severity) as count by severity</searchString>
+			<searchString>sourcetype="django" host="$host$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | timechart count(severity) as count by severity</searchString>
 			<title>Messages by Severity (over time)</title>
 			<option name="charting.chart">area</option>
 			<option name="count">10</option>
@@ -30,7 +30,7 @@
 		</chart>
 		<table>
 			<!-- <searchName>messages_by_severity</searchName>  -->
-			<searchString>sourcetype="django" source="$source$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | stats sparkline count by severity | sort -count</searchString>
+			<searchString>sourcetype="django" host="$host$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | stats sparkline count by severity | sort -count</searchString>
 			<title>Messages by Severity</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
@@ -42,7 +42,7 @@
 	<row>
 		<table>
 			<!-- <searchName>messages_by_module</searchName> -->
-			<searchString>sourcetype="django" source="$source$" | stats sparkline count by module | sort -count</searchString>
+			<searchString>sourcetype="django" host="$host$" | stats sparkline count by module | sort -count</searchString>
 			<title>Messages by Logger Name</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
@@ -51,7 +51,7 @@
 			</drilldown>
 		</table>
 		<table>
-			<searchString>sourcetype="django" source="$source$" NOT (tag=database_query OR tag=database_change) | sort -_time | head 1000 | eval severity=lower(vendor_severity) | fillnull value="(undefined)" message | eval message=if(isnotnull(error_message),error_message,message)| table message severity</searchString>
+			<searchString>sourcetype="django" host="$host$" NOT (tag=database_query OR tag=database_change) | sort -_time | head 1000 | eval severity=lower(vendor_severity) | fillnull value="(undefined)" message | eval message=if(isnotnull(error_message),error_message,message)| table message severity</searchString>
 			<title>Most Recent Messages (Excluding SQL Logs)</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
