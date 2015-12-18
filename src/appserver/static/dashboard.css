@@ -1,0 +1,8 @@
+
+#input2.input-dropdown{
+    width: 550px;
+}
+
+#input2 > .splunk-dropdown > .select2-container{
+   width: 555px !important; 
+}
