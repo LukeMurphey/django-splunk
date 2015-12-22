@@ -121,6 +121,6 @@ Change History
 |---------|------------------------------------------------------------------------------------------------------------------|
 | 1.2.2   | Updated icon for Splunk 6.2                                                                                      |
 |---------|------------------------------------------------------------------------------------------------------------------|
-| 1.3.0   | Added ability to filter multiple sources                                                                         |
-|         | Event severity chart on the operations dashbaord is now stacked                                                  |
+| 1.3.0   | Added ability to filter multiple hosts                                                                           |
+|         | Event severity chart on the operations dashboard is now stacked                                                  |
 +---------+------------------------------------------------------------------------------------------------------------------+
