@@ -43,7 +43,7 @@
 		</chart>
 		<table>
 			<!-- <searchName>sql_query_actions</searchName> -->
-			<searchString>sourcetype="django" host="$host$" (SELECT OR UPDATE OR DELETE OR INSERT) | stats sparkline count sum(duration), avg(duration), max(duration) by sql_action</searchString>
+			<searchString>sourcetype="django" host="$host$" (SELECT OR UPDATE OR DELETE OR INSERT OR BEGIN OR END) | stats sparkline count sum(duration), avg(duration), max(duration) by sql_action</searchString>
 			<title>Queries</title>
 			<option name="count">10</option>
 			<option name="displayRowNumbers">true</option>
