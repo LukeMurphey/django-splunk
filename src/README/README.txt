@@ -61,6 +61,7 @@ LOGGING = {
         },
     }
 }
+
 This will configure a rotating file handler to the directory ../var/log/app.log. Make sure that this path exists or change it to log to the wherever you would like the log files to exist. Also, make sure to disable propagation of the database logs on production hosts since these logs can be very verbose. 
 
 
@@ -68,7 +69,15 @@ This will configure a rotating file handler to the directory ../var/log/app.log.
 Configuring Splunk
 ================================================
 
-Setup Splunk to monitor the logs files from your Django installation. Make sure to set the sourcetype to "django". See the following page for details on how to monitor files with Splunk:
+Install this app into Splunk by doing the following:
+
+  1. Log in to Splunk Web and navigate to "Apps » Manage Apps" via the app dropdown at the top left of Splunk's user interface
+  2. Click the "install app from file" button
+  3. Upload the file by clicking "Choose file" and selecting the app
+  4. Click upload
+  5. Restart Splunk if a dialog asks you to
+
+Once the app is installed, setup Splunk to monitor the logs files from your Django installation. Make sure to set the sourcetype to "django". See the following page for details on how to monitor files with Splunk:
 
      http://docs.splunk.com/Documentation/Splunk/latest/Data/MonitorFilesandDirectories
 
