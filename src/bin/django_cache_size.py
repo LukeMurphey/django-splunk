@@ -12,7 +12,7 @@ import os
 path_to_mod_input_lib = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'modular_input.zip')
 sys.path.insert(0, path_to_mod_input_lib)
 
-from modular_input import Field, FieldValidationException, ModularInput, DurationField, FilePathField
+from modular_input import ModularInput, DurationField, FilePathField
 
 class DjangoCacheSize(ModularInput):
     """
@@ -34,14 +34,14 @@ class DjangoCacheSize(ModularInput):
                 DurationField("interval", "Interval", "The interval defining how often to perform the check; can include time units (e.g. 15m for 15 minutes, 8h for 8 hours)", empty_allowed=False)
                 ]
 
-        ModularInput.__init__(self, scheme_args, args, logger_name='cache_size_modular_input', logger_level=logging.INFO)
+        ModularInput.__init__(self, scheme_args, args, logger_name='cache_size_modular_input', logger_level=logging.DEBUG)
         
         if timeout > 0:
             self.timeout = timeout
         else:
             self.timeout = 5
         
-    def output_result(self, path, total_cache_size, number_of_files, stanza, index=None, source=None, sourcetype=None, unbroken=True, close=True, out=sys.stdout ):
+    def output_result(self, path, total_cache_size, number_of_files, stanza, index=None, source=None, sourcetype=None, host=None, unbroken=True, close=True, out=sys.stdout):
         """
         Create a string representing the event.
         
@@ -59,13 +59,14 @@ class DjangoCacheSize(ModularInput):
         """
         
         data = {
+                'path': path,
                 'cache_size': total_cache_size,
                 'cache_files': number_of_files,
-                'path': path
                 }
         
-        return self.output_event(data, stanza, index=index, source=source, sourcetype=sourcetype, unbroken=unbroken, close=close, out=out)
-        
+        # Output event with fields
+        return self.output_event(data, stanza, index=index, host=host, source=source,
+                                 sourcetype=sourcetype, unbroken=unbroken, close=close, out=out)
     @classmethod
     def get_cache_size(cls, path, logger=None):
         """
@@ -109,20 +110,22 @@ class DjangoCacheSize(ModularInput):
         self.logger.debug("Running")
 
         # Make the parameters
-        interval   = cleaned_params["interval"]
-        path       = cleaned_params["path"]
-        sourcetype = "django_file_cache_size"
-        index      = cleaned_params["index"]
-        source     = stanza
-
-        if self.needs_another_run( input_config.checkpoint_dir, stanza, interval ):
-            
+        interval = cleaned_params["interval"]
+        path = cleaned_params["path"]
+        sourcetype = cleaned_params.get("sourcetype", "django_file_cache_size")
+        index = cleaned_params.get("index", "default")
+        source = stanza
+        host = cleaned_params.get("host", None)
+        
+        if self.needs_another_run(input_config.checkpoint_dir, stanza, interval):
+            self.logger.debug("needs_another_run")
             # Perform the Django cache file size analysis
             total_size, number_of_files = DjangoCacheSize.get_cache_size(path)
             
             # Send the event
-            self.output_result( path, total_size, number_of_files, stanza, index=index, source=source, sourcetype=sourcetype, unbroken=True, close=True )
-            
+            self.output_result(path, total_size, number_of_files, stanza, host=host, index=index, source=source,
+                            sourcetype=sourcetype, unbroken=True, close=True)
+
             # Get the time that the input last ran
             last_ran = self.last_ran(input_config.checkpoint_dir, stanza)
 
@@ -131,12 +134,13 @@ class DjangoCacheSize(ModularInput):
                                         {
                                             'last_run' : self.get_non_deviated_last_run(last_ran, interval, stanza)
                                         })
-        
+        else:
+            self.logger.debug("needs_another_run is false")
 if __name__ == '__main__':
     try:
         django_cache_size = DjangoCacheSize()
         django_cache_size.execute()
         sys.exit(0)
     except Exception as e:
-        logger.exception("Unhandled exception was caught, this may be due to a defect in the script") # This logs general exceptions that would have been unhandled otherwise (such as coding errors)
+        # logger.exception("Unhandled exception was caught, this may be due to a defect in the script") # This logs general exceptions that would have been unhandled otherwise (such as coding errors)
         raise e
