@@ -4,48 +4,16 @@ import os
 import time
 import shutil
 import tempfile
-from StringIO import StringIO
+try:
+    from StringIO import StringIO ## for Python 2
+except ImportError:
+    from io import StringIO ## for Python 3
 
 sys.path.append( os.path.join("..", "src", "bin") )
 
-from django_cache_size import PathField, DurationField, DjangoCacheSize
+from django_cache_size import DjangoCacheSize
 from modular_input import Field, FieldValidationException
 
-class TestPathField(unittest.TestCase):
-    
-    def test_path_field_valid(self):
-        path_field = PathField( "test_path_field_valid", "title", "this is a test" )
-        
-        #self.assertEqual( path_field.to_python("/etc/path/").geturl(), "/etc/path/" )
-     
-    """   
-    def test_path_field_invalid(self):
-        path_field = PathField( "test_path_field_invalid", "title", "this is a test" )
-        
-        self.assertRaises( FieldValidationException, lambda: url_field.to_python("hxxp://google.com") )
-        self.assertRaises( FieldValidationException, lambda: url_field.to_python("http://") )
-        self.assertRaises( FieldValidationException, lambda: url_field.to_python("google.com") )
-    """
-    
-class TestDurationField(unittest.TestCase):
-    
-    def test_duration_valid(self):
-        duration_field = DurationField( "test_duration_valid", "title", "this is a test" )
-        
-        self.assertEqual( duration_field.to_python("1m"), 60 )
-        self.assertEqual( duration_field.to_python("5m"), 300 )
-        self.assertEqual( duration_field.to_python("5 minute"), 300 )
-        self.assertEqual( duration_field.to_python("5"), 5 )
-        self.assertEqual( duration_field.to_python("5h"), 18000 )
-        self.assertEqual( duration_field.to_python("2d"), 172800 )
-        self.assertEqual( duration_field.to_python("2w"), 86400 * 7 * 2 )
-        
-    def test_url_field_invalid(self):
-        duration_field = DurationField( "test_url_field_invalid", "title", "this is a test" )
-        
-        self.assertRaises( FieldValidationException, lambda: duration_field.to_python("1 treefrog") )
-        self.assertRaises( FieldValidationException, lambda: duration_field.to_python("minute") )   
-    
 class TestDjangoCacheSize(unittest.TestCase):
     
     def setUp(self):
