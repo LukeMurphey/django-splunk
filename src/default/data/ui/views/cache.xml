@@ -27,9 +27,9 @@
 	<row>
 		<chart>
 			<title>Cache by Size</title>
-		  	<search>
-		    	sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_size) by stanza
-		  	</search>
+			<search>
+				<query>sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_size) by stanza</query>
+			</search>
 		  	<option name="height">200</option>
 		  	<option name="charting.chart">area</option>
 		  	<option name="charting.chart.stackMode">stacked</option>
@@ -45,7 +45,7 @@
 		<chart>
 			<title>Cache by Number of Files</title>
 		  	<search>
-		    	sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_files) by stanza
+		    	<query>sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_files) by stanza</query>
 		  	</search>
 		  	<option name="height">200</option>
 		  	<option name="charting.chart">area</option>
