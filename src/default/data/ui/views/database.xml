@@ -26,7 +26,7 @@
 			<default>*</default>
 			<choice value="*">All</choice>
 			<search fieldForLabel="host" fieldForValue="host">
-				sourcetype="django" | stats count by host
+				<query>sourcetype="django" | stats count by host</query>
 			</search>
 		</input>
 	</fieldset>
@@ -34,7 +34,7 @@
 	<row>
 		<chart>
 			<!-- <searchName>database_query_counts</searchName> -->
-			<search>sourcetype=django host="$host$" tag=database_query | timechart sum(duration)</search>
+			<search><query>sourcetype=django host="$host$" tag=database_query | timechart sum(duration)</query></search>
 			<title>Query Duration (over time)</title>
 			<option name="charting.chart">area</option>
 			<option name="count">10</option>
@@ -42,7 +42,7 @@
 		</chart>
 		<table>
 			<!-- <searchName>sql_query_actions</searchName> -->
-			<search>sourcetype="django" host="$host$" (SELECT OR UPDATE OR DELETE OR INSERT OR BEGIN OR END) | stats sparkline count sum(duration), avg(duration), max(duration) by sql_action</search>
+			<search><query>sourcetype="django" host="$host$" (SELECT OR UPDATE OR DELETE OR INSERT OR BEGIN OR END) | stats sparkline count sum(duration), avg(duration), max(duration) by sql_action</query></search>
 			<title>Queries</title>
 			<option name="count">10</option>
 		</table>
@@ -50,7 +50,7 @@
 	<row>
 		<table>
 			<!-- <searchName>most_common_sql_queries_summary</searchName> -->
-			<search>sourcetype="django" host="$host$" tag=database_query sql_action=SELECT | fillnull value="" join_type join_table | stats sparkline count(table) as count, sum(duration), avg(duration), max(duration) by table, join_type, join_table | sort -count</search>
+			<search><query>sourcetype="django" host="$host$" tag=database_query sql_action=SELECT | fillnull value="" join_type join_table | stats sparkline count(table) as count, sum(duration), avg(duration), max(duration) by table, join_type, join_table | sort -count</query></search>
 			<title>Most Common Queries</title>
 		</table>
 	</row>

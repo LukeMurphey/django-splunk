@@ -10,7 +10,7 @@
 			<default>*</default>
 			<choice value="*">All</choice>
 			<search fieldForLabel="host" fieldForValue="host">
-				sourcetype="django" | stats count by host
+				<query>sourcetype="django" | stats count by host</query>
 			</search>
 		</input>
 	</fieldset>
@@ -19,7 +19,7 @@
 	<row>
 		<chart>
 			<!-- <searchName>messages_by_severity_over_time</searchName> -->
-			<search>sourcetype="django" host="$host$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | timechart count(severity) as count by severity</search>
+			<search><query>sourcetype="django" host="$host$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | timechart count(severity) as count by severity</query></search>
 			<title>Messages by Severity (over time)</title>
 			<option name="charting.chart">area</option>
 			<option name="count">10</option>
@@ -29,7 +29,7 @@
 		</chart>
 		<table>
 			<!-- <searchName>messages_by_severity</searchName>  -->
-			<search>sourcetype="django" host="$host$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | stats sparkline count by severity | sort -count</search>
+			<search><query>sourcetype="django" host="$host$" | fillnull value="undefined" vendor_severity | eval severity=lower(vendor_severity) | stats sparkline count by severity | sort -count</query></search>
 			<title>Messages by Severity</title>
 			<option name="count">10</option>
 			<drilldown>
@@ -40,7 +40,7 @@
 	<row>
 		<table>
 			<!-- <searchName>messages_by_module</searchName> -->
-			<search>sourcetype="django" host="$host$" | stats sparkline count by module | sort -count</search>
+			<search><query>sourcetype="django" host="$host$" | stats sparkline count by module | sort -count</query></search>
 			<title>Messages by Logger Name</title>
 			<option name="count">10</option>
 			<drilldown>
@@ -48,7 +48,7 @@
 			</drilldown>
 		</table>
 		<table>
-			<search>sourcetype="django" host="$host$" NOT (tag=database_query OR tag=database_change) | sort -_time | head 1000 | eval severity=lower(vendor_severity) | fillnull value="(undefined)" message | eval message=if(isnotnull(error_message),error_message,message)| table message severity</search>
+			<search><query>sourcetype="django" host="$host$" NOT (tag=database_query OR tag=database_change) | sort -_time | head 1000 | eval severity=lower(vendor_severity) | fillnull value="(undefined)" message | eval message=if(isnotnull(error_message),error_message,message)| table message severity</query></search>
 			<title>Most Recent Messages (Excluding SQL Logs)</title>
 			<option name="count">10</option>
 		</table>

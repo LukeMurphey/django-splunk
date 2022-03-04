@@ -10,7 +10,7 @@
 			<default>*</default>
 			<choice value="*">All</choice>
 			<search fieldForLabel="host" fieldForValue="host">
-				sourcetype="django" | stats count by host
+				<query>sourcetype="django" | stats count by host</query>
 			</search>
 		</input>
 	</fieldset>
@@ -19,7 +19,7 @@
 	<row>
 		<table>
 			<!-- <searchName>server_500_errors</searchName>  -->
-			<search>sourcetype="django" host="$host$" tag=server tag=error | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by url error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</search>
+			<search><query>sourcetype="django" host="$host$" tag=server tag=error | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by url error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</query></search>
 			<title>Errors (Web Facing)</title>
 			<option name="count">10</option>
 			<option name="charting.chart.stackMode">stacked</option>
@@ -31,7 +31,7 @@
 	<row>
 		<table>
 			<!-- <searchName>server_errors_non_web_facing</searchName> -->
-			<search>sourcetype="django" host="$host$" tag=error NOT tag=server | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</search>
+			<search><query>sourcetype="django" host="$host$" tag=error NOT tag=server | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</query></search>
 			<title>Errors (Non-Web Facing)</title>
 			<option name="count">10</option>
 			<drilldown>
@@ -41,7 +41,7 @@
 	</row>
 	<row>
 		<chart>
-			<search>sourcetype="django" host="$host$" tag=error | timechart count</search>
+			<search><query>sourcetype="django" host="$host$" tag=error | timechart count</query></search>
 			<title>Errors Over Time</title>
 			<option name="charting.chart">area</option>
 			<option name="count">10</option>
