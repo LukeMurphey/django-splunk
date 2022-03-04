@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<form>
+<form version='1.1'>
 
 	<fieldset autoRun="true">
 		<input type="time">
@@ -9,9 +9,9 @@
 			<label>Host:</label>
 			<default>*</default>
 			<choice value="*">All</choice>
-			<populatingSearch fieldForLabel="host" fieldForValue="host">
+			<search fieldForLabel="host" fieldForValue="host">
 				sourcetype="django" | stats count by host
-			</populatingSearch>
+			</search>
 		</input>
 	</fieldset>
 
@@ -19,10 +19,9 @@
 	<row>
 		<table>
 			<!-- <searchName>server_500_errors</searchName>  -->
-			<searchString>sourcetype="django" host="$host$" tag=server tag=error | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by url error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</searchString>
+			<search>sourcetype="django" host="$host$" tag=server tag=error | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by url error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</search>
 			<title>Errors (Web Facing)</title>
 			<option name="count">10</option>
-			<option name="displayRowNumbers">true</option>
 			<option name="charting.chart.stackMode">stacked</option>
 			<drilldown>
 				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango%20error_message%3D"$row.error_message$"&earliest=$earliest$&latest=$latest$]]></link>
@@ -32,10 +31,9 @@
 	<row>
 		<table>
 			<!-- <searchName>server_errors_non_web_facing</searchName> -->
-			<searchString>sourcetype="django" host="$host$" tag=error NOT tag=server | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</searchString>
+			<search>sourcetype="django" host="$host$" tag=error NOT tag=server | stats sparkline count(error_message) as count min(_time) as first_observed, max(_time) as last_observed by error_message | convert ctime(first_observed) ctime(last_observed) | sort -last_observed</search>
 			<title>Errors (Non-Web Facing)</title>
 			<option name="count">10</option>
-			<option name="displayRowNumbers">true</option>
 			<drilldown>
 				<link><![CDATA[/app/django/flashtimeline/?q=search%20sourcetype%3Ddjango%20error_message%3D"$row.error_message$"&earliest=$earliest$&latest=$latest$]]></link>
 			</drilldown>
@@ -43,11 +41,10 @@
 	</row>
 	<row>
 		<chart>
-			<searchString>sourcetype="django" host="$host$" tag=error | timechart count</searchString>
+			<search>sourcetype="django" host="$host$" tag=error | timechart count</search>
 			<title>Errors Over Time</title>
 			<option name="charting.chart">area</option>
 			<option name="count">10</option>
-			<option name="displayRowNumbers">true</option>
 		</chart>
 	</row>
 </form>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-<form>
+<form version='1.1'>
 	<label>Database</label>
 
 	<row>
@@ -25,34 +25,32 @@
 			<label>Host:</label>
 			<default>*</default>
 			<choice value="*">All</choice>
-			<populatingSearch fieldForLabel="host" fieldForValue="host">
+			<search fieldForLabel="host" fieldForValue="host">
 				sourcetype="django" | stats count by host
-			</populatingSearch>
+			</search>
 		</input>
 	</fieldset>
 
 	<row>
 		<chart>
 			<!-- <searchName>database_query_counts</searchName> -->
-			<searchString>sourcetype=django host="$host$" tag=database_query | timechart sum(duration)</searchString>
+			<search>sourcetype=django host="$host$" tag=database_query | timechart sum(duration)</search>
 			<title>Query Duration (over time)</title>
 			<option name="charting.chart">area</option>
 			<option name="count">10</option>
-			<option name="displayRowNumbers">true</option>
 			<option name="charting.chart.nullValueMode">zero</option>
 		</chart>
 		<table>
 			<!-- <searchName>sql_query_actions</searchName> -->
-			<searchString>sourcetype="django" host="$host$" (SELECT OR UPDATE OR DELETE OR INSERT OR BEGIN OR END) | stats sparkline count sum(duration), avg(duration), max(duration) by sql_action</searchString>
+			<search>sourcetype="django" host="$host$" (SELECT OR UPDATE OR DELETE OR INSERT OR BEGIN OR END) | stats sparkline count sum(duration), avg(duration), max(duration) by sql_action</search>
 			<title>Queries</title>
 			<option name="count">10</option>
-			<option name="displayRowNumbers">true</option>
 		</table>
 	</row>
 	<row>
 		<table>
 			<!-- <searchName>most_common_sql_queries_summary</searchName> -->
-			<searchString>sourcetype="django" host="$host$" tag=database_query sql_action=SELECT | fillnull value="" join_type join_table | stats sparkline count(table) as count, sum(duration), avg(duration), max(duration) by table, join_type, join_table | sort -count</searchString>
+			<search>sourcetype="django" host="$host$" tag=database_query sql_action=SELECT | fillnull value="" join_type join_table | stats sparkline count(table) as count, sum(duration), avg(duration), max(duration) by table, join_type, join_table | sort -count</search>
 			<title>Most Common Queries</title>
 		</table>
 	</row>

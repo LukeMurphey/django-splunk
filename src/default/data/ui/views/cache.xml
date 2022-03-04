@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<form>
+<form version='1.1'>
 	
 	<label>Cache</label>
 
@@ -27,10 +27,10 @@
 	<row>
 		<chart>
 			<title>Cache by Size</title>
-		  	<searchString>
+		  	<search>
 		    	sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_size) by stanza
-		  	</searchString>
-		  	<option name="height">200px</option>
+		  	</search>
+		  	<option name="height">200</option>
 		  	<option name="charting.chart">area</option>
 		  	<option name="charting.chart.stackMode">stacked</option>
 		  	<option name="charting.chart.nullValueMode">connect</option>
@@ -44,10 +44,10 @@
 	<row>
 		<chart>
 			<title>Cache by Number of Files</title>
-		  	<searchString>
+		  	<search>
 		    	sourcetype="django_file_cache_size" stanza="$stanza$" | timechart max(cache_files) by stanza
-		  	</searchString>
-		  	<option name="height">200px</option>
+		  	</search>
+		  	<option name="height">200</option>
 		  	<option name="charting.chart">area</option>
 		  	<option name="charting.chart.stackMode">stacked</option>
 		  	<option name="charting.chart.nullValueMode">connect</option>
